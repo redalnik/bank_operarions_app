@@ -8,14 +8,6 @@ from src.utils import cards, currencies, day_time, stock_prices, top_transaction
 def get_views(df: pd.DataFrame, user_setting: dict, date_time: str) -> dict:
     """
     Основная функция: собирает все данные в итоговый JSON для страницы "Главная".
-
-    Args:
-        df: DataFrame с транзакциями
-        user_setting: Словарь с настройками пользователя
-        date_time: Дата и время в формате "YYYY-MM-DD HH:MM:SS"
-
-    Returns:
-        Словарь с данными для главной страницы
     """
     currency = ",".join(user_setting["user_currencies"])
     stocks = user_setting["user_stocks"]

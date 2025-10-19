@@ -9,14 +9,6 @@ import pandas as pd
 def categories_cashback(transactions: pd.DataFrame, year: str, month: str) -> dict:
     """
     Рассчитывает потенциальный кэшбэк по категориям за выбранный месяц.
-
-    Args:
-        transactions: DataFrame с транзакциями
-        year: Год анализа (YYYY)
-        month: Месяц анализа (MM)
-
-    Returns:
-        Словарь {категория: сумма к возврату (руб., 1%)}.
     """
     df = transactions.copy()
     logging.info(f"Рассчитан кэшбэк по категориям за {year}-{month}")

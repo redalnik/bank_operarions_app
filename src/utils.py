@@ -13,9 +13,6 @@ load_dotenv()
 def day_time() -> str:
     """
     Возвращает приветствие в зависимости от текущего времени суток.
-
-    Returns:
-        Строка-приветствие.
     """
     now_time = datetime.datetime.now().hour
 
@@ -34,15 +31,6 @@ def day_time() -> str:
 def cards(df: pd.DataFrame) -> list[dict]:
     """
     Собирает агрегированную статистику по картам: последние цифры, сумма трат, кэшбэк.
-
-    Args:
-        df: DataFrame с транзакциями
-
-    Returns:
-        Список словарей с полями:
-        - last_digits: последние цифры номера карты;
-        - total_spent: общая сумма трат (положительное число);
-        - cashback: ориентировочный кэшбэк (1% от трат).
     """
     filtered_df = df[df["Сумма платежа"] < 0]
     grouped_df = filtered_df.groupby("Номер карты")
@@ -62,12 +50,6 @@ def cards(df: pd.DataFrame) -> list[dict]:
 def top_transactions(df: pd.DataFrame) -> list[dict]:
     """
     Возвращает топ-5 транзакций по абсолютной сумме списаний.
-
-    Args:
-        df: DataFrame с транзакциями
-
-    Returns:
-        Список словарей с топ-5 транзакциями
     """
     df_sorted = df.sort_values("Сумма платежа")
     df_top = df_sorted[:5].to_dict(orient="records")
@@ -88,12 +70,6 @@ def top_transactions(df: pd.DataFrame) -> list[dict]:
 def currencies(symbols: str) -> list[dict]:
     """
     Возвращает курсы указанных валют к рублю.
-
-    Args:
-        symbols: Список валют через запятую
-
-    Returns:
-        Список словарей с курсами валют
     """
     base = "RUB"
     url = f"https://api.apilayer.com/exchangerates_data/latest?symbols={symbols}&base={base}"
@@ -122,12 +98,6 @@ def currencies(symbols: str) -> list[dict]:
 def stock_prices(stocks: list[str]) -> list[dict]:
     """
     Возвращает текущие цены акций по тикерам.
-
-    Args:
-        stocks: Список тикеров акций
-
-    Returns:
-        Список словарей с ценами акций
     """
     finnhub_client = finnhub.Client(api_key=os.getenv("APIFINN"))
 
@@ -139,7 +109,7 @@ def stock_prices(stocks: list[str]) -> list[dict]:
             if price is None:
                 continue
             result_stocks.append({"stock": stock_symbol, "price": price})
-        except Exception as exc:  # finnhub client may raise various exceptions
+        except Exception as exc:
             logging.error(f"Ошибка при запросе котировок для {stock_symbol}: {exc}")
             continue
     logging.info(f"Получены котировки акций: {stocks}")
