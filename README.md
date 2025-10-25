@@ -19,12 +19,12 @@ poetry install
 
 2. **Запустите приложение:**
 ```bash
-poetry run python main.py
+python main.py
 ```
 
 3. **Запустите тесты:**
 ```bash
-poetry run pytest
+pytest .
 ```
 
 ## 📁 Структура проекта
@@ -52,7 +52,7 @@ coursework/
 ## 🧪 Тестирование
 
 ```bash
-poetry run pytest --cov=src
+pytest --cov=src
 ```
 
 ## 📄 Лицензия
